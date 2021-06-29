@@ -31,18 +31,45 @@ Windows Server SKUs. In addition, it is available [only for 64-bit versions of
 Windows](https://docs.microsoft.com/windows/wsl/install-win10).
 
 Full instructions to install WSL are available on the above link.
-To install WSL on Windows 10 with Fall Creators Update installed (version >= 16215.0) do the following:
+To install WSL on Windows 10 with Fall Creators Update installed (version >= 16215.0) do the following:  
 
+### Install on C:\
 1. Enable the Windows Subsystem for Linux feature
   * Open the Windows Features dialog (`OptionalFeatures.exe`)
   * Enable 'Windows Subsystem for Linux'
-  * Click 'OK' and restart if necessary
+  * Click 'OK' and restart if necessary    
 2. Install Ubuntu
   * Open Microsoft Store and search for "Ubuntu 18.04" or use [this link](https://www.microsoft.com/store/productId/9N9TNGVNDL3Q)
   * Click Install
 3. Complete Installation
   * Open a cmd prompt and type "Ubuntu1804"
-  * Create a new UNIX user account (this is a separate account from your Windows account)
+  * Create a new UNIX user account (this is a separate account from your Windows account)  
+
+### Install on non-system drive (D:\ , F:\ ...)  
+1. Enable windows subsystem for Linux system feature  
+* Open **Powershell** as admin  
+*Run this command :*  
+
+        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux 
+        
+2. Create an Ubuntu folder 
+       
+       mkdir D:\WSL\Ubuntu
+       
+3. Download and install a Linux distribution (example : Ubuntu 18.04)
+*Run this command :*  
+
+        Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile Ubuntu.appx -UseBasicParsing 
+
+*Unpack the zip file*  
+
+        move .\Ubuntu.appx .\Ubuntu.zip 
+        Expand-Archive .\Ubuntu.zip
+        
+*Initialize Linux distro*  
+        
+        cd .\Ubuntu\  
+        .\ubuntu1804.exe 
 
 After the bash shell is active, you can follow the instructions below, starting
 with the "Cross-compilation" section. Compiling the 64-bit version is
